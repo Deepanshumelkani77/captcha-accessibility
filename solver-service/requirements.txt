@@ -1,7 +1,8 @@
 fastapi
 uvicorn
 torch
-torchvision
-Pillow
 librosa
+scipy
+Pillow
+torchvision
 numpy
