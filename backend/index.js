@@ -1,27 +1,18 @@
-const express=require("express");
-const cors=require("cors");
-const dotenv=require("dotenv");
-const mongoose=require("mongoose");
-
-
-
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 dotenv.config();
-const app=express();
+const app = express();
 app.use(cors());
 app.use(express.json());
 //app.use('/api/captcha',captchaRoutes);
 
-
-const port=7000;
-app.listen(port,()=>{
-    console.log("server starting at port:",port);
-})
-
-
-
-
-//Kk8c5KST9Ib3J3FP
+const port = 7000;
+app.listen(port, () => {
+  console.log("server starting at port:", port);
+});
 
 const connectDB = async () => {
   try {
@@ -33,4 +24,5 @@ const connectDB = async () => {
     console.error("Error connecting to database", error);
   }
 };
+
 connectDB();
