@@ -21,5 +21,5 @@ def preprocess_text(base64_str):
     M=cv2.getRotationMatrix2D((w//2,h//2),angle,1.0)
     deskewed=cv2.warpAffine(thresh,M,(w,h),flags=cv2.INTER_CUBIC)
 
-    -,buffer=cv2.imencode('.png',deskewed)
+    _,buffer=cv2.imencode('.png',deskewed)
     return base64.b64decode(buffer).decode('utf-8')
