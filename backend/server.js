@@ -21,9 +21,6 @@ app.listen(port,()=>{
 
 
 
-// mongoose.connect("mongodb+srv://deepumelkani123:Kk8c5KST9Ib3J3FP@cluster0.aujdhik.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",{useNewUrlParser:true,useUnifiedTopology:true})
-// .then(()=>{app.listen(2500,()=>{console.log("server running on port 2500")})})
-// .catch(err=>console.log(err));
 //Kk8c5KST9Ib3J3FP
 
 const connectDB=async ()=>{
