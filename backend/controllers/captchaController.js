@@ -3,6 +3,8 @@ const Log = require("../models/Log");
 
 const solveCaptcha = async (req, res) => {
   const { type, data } = req.body;
+  console.log("hello dev",req.body)
+
   console.log("Received request:");
   console.log("Type:", type);
   console.log("Data (preview):", typeof data === 'string' ? data.slice(0, 100) : data);
@@ -34,5 +36,9 @@ const solveCaptcha = async (req, res) => {
     res.status(500).json({ message: err.response?.data || err.message });
   }
 };
+
+
+
+
 
 module.exports = { solveCaptcha };
