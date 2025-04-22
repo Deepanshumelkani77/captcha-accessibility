@@ -1,5 +1,7 @@
 from fastapi import FastAPI,Request
-from preprocessor import image_preprocess,text_preprocess,audio_preprocess
+from preprocessors.text_preprocess import preprocess_text
+from preprocessors.image_preprocess import preprocess_image
+from preprocessors.audio_preprocess import preprocess_audio
 
 app=FastAPI()
 
@@ -8,8 +10,10 @@ async def preprocess(type:str,request:Request):
     body=await request.json()
     data=body["data"]
     if type=="image":
-        return image_preprocess(data)
+        return {"processed":preprocess_image(data)}
     elif type=="text":
-        return text_preprocess(data)
+        return {"processed":preprocess_text(data)}
     elif type=="audio":
-        return audio_preprocess(data)
+       return {"processed":preprocess_audio(data)}
+    else:
+        return {"error":"Unsupported CAPTCHA type"}
