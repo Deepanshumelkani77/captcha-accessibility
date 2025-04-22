@@ -17,7 +17,7 @@ app.listen(port, () => {
 const connectDB = async () => {
   try {
     mongoose.connect(
-      "mongodb+srv://deepumelkani123:Kk8c5KST9Ib3J3FP@cluster0.aujdhik.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      "mongodb+srv://deepumelkani123:Deepak123@cluster0.aujdhik.mongodb.net/captcha_accessibility?retryWrites=true&w=majority&appName=Cluster0"
     );
     console.log("Database connect successfully");
   } catch (error) {
