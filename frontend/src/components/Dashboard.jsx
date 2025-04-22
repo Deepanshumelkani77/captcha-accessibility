@@ -1,20 +1,24 @@
-import { useEffect,useState } from "react";
-import axios from 'axios';
-// import Chart from './Chart';
+import React, { useEffect, useState } from "react";
+import { fetchLogs } from "../services/api";
+import Chart from "./Chart";
 
-export default function Dashboard(){
-    const [logs,setLogs]=useState([]);
+function Dashboard() {
+  const [logs, setLogs] = useState([]);
 
-    useEffect(()=>{
-        axios.get('/api/captcha/logs').then(res=>setLogs(res.data));
-    },[]);
-return (
-    <div className="p-4">
-        <h1 className="text-xl font-bold">
-            Solver Performance
-        </h1>
-        {/* <Chart data={logs}/> */}
+  useEffect(() => {
+    const getLogs = async () => {
+      const data = await fetchLogs();
+      setLogs(data);
+    };
+    getLogs();
+  }, []);
+
+  return (
+    <div className="bg-white rounded-xl shadow p-6">
+      <h2 className="text-xl font-semibold mb-4">CAPTCHA Solving Logs</h2>
+      <Chart logs={logs} />
     </div>
-);
-
+  );
 }
+
+export default Dashboard;
