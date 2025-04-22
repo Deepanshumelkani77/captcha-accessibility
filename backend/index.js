@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 //app.use('/api/captcha',captchaRoutes);
 
-const port = 7000;
+const port = 5000;
 app.listen(port, () => {
   console.log("server starting at port:", port);
 });
