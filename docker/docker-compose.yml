@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./docker/Dockerfile.backend
+    ports:
+      - "5000:5000"
+    preprocessor:
+      build: ./docker/Dockerfile.preprocessor
+      ports:
+        - "6000:6000"
+    solver:
+      build: ./docker/Dockerfile.solver
+      ports:
+        - "7000:7000"
+    mongo:
+      image: mongo
+      ports:
+        - "27017:27017"
