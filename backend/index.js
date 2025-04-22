@@ -23,16 +23,14 @@ app.listen(port,()=>{
 
 //Kk8c5KST9Ib3J3FP
 
-const connectDB=async ()=>{
-
-try{
-    mongoose.connect("mongodb+srv://deepumelkani123:Kk8c5KST9Ib3J3FP@cluster0.aujdhik.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-console.log("Database connect successfully")
-}
-catch (error){
-console.error("Error connecting to database",error)
-}
-
-
-}
+const connectDB = async () => {
+  try {
+    mongoose.connect(
+      "mongodb+srv://deepumelkani123:Kk8c5KST9Ib3J3FP@cluster0.aujdhik.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    );
+    console.log("Database connect successfully");
+  } catch (error) {
+    console.error("Error connecting to database", error);
+  }
+};
 connectDB();
