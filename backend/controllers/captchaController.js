@@ -9,30 +9,53 @@ const solveCaptcha = async (req, res) => {
 
   try {
     const preprocessURL = `http://localhost:6000/preprocess/${type}`;
-    const solveURL = `http://localhost:7000/solve`;
-
-    // Make a POST request to the preprocessing service
-    const preprocessed = await axios.post(preprocessURL, { data });
-    console.log("Preprocessed data:", preprocessed.data);
-
-    // Use the preprocessed data to solve the CAPTCHA
+    const solveURL = `http://localhost:7000/captcha/solve`;
+  
+    const preprocessed = await axios.post(preprocessURL, { data }, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+    console.log("Preprocess response:", preprocessed.data);
+  
+    if (!preprocessed.data?.processed) {
+      throw new Error("Preprocessing failed: no 'processed' field in response");
+    }
+  
     const result = await axios.post(solveURL, {
       type,
-      data: preprocessed.data.processed, // Accessing the 'processed' field from the response
+      data: preprocessed.data.processed,
     });
-
-    console.log("Result from solver:", result.data);
-
-    // Log the result
+  
+    console.log("Solver result:", result.data);
+  
     const log = new Log({ ...result.data, timestamp: new Date(), type });
     await log.save();
-
-    // Send the result back to the frontend
+  
     res.json(result.data);
   } catch (err) {
-    console.error("Error solving CAPTCHA:", err.response?.data || err.message); // Log the full error response
-    res.status(500).json({ message: err.response?.data || err.message });
+    console.error("🔥 ERROR DETAILS 🔥");
+  
+    if (err.response) {
+      console.error("Status:", err.response.status);
+      console.error("Data:", err.response.data);
+      console.error("Headers:", err.response.headers);
+      
+      // Custom error messages based on status code
+      if (err.response.status === 400) {
+        res.status(400).json({ message: "Bad request", details: err.response.data });
+      } else if (err.response.status === 404) {
+        res.status(404).json({ message: "Service not found", details: err.response.data });
+      } else {
+        res.status(500).json({ message: "Internal server error", details: err.response.data });
+      }
+    } else if (err.request) {
+      console.error("No response received:");
+      console.error(err.request);
+      res.status(500).json({ message: "No response from external service" });
+    } else {
+      console.error("Error message:", err.message);
+      res.status(500).json({ message: "Internal server error", detail: err.message });
+    }
   }
-};
+}; 
 
 module.exports = { solveCaptcha };

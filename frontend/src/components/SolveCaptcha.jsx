@@ -26,6 +26,7 @@ function SolveCaptcha() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Sending request with data:", { type: captchaType, data: captchaData });
       const response = await axios.post(`/captcha/solve`, {
         type: captchaType,
         data: captchaData,
@@ -33,7 +34,7 @@ function SolveCaptcha() {
       setSolution(response.data.solution);
       setConfidence(response.data.confidence);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to solve CAPTCHA:", err);
       setError("Failed to solve CAPTCHA. Try again.");
     }
   };

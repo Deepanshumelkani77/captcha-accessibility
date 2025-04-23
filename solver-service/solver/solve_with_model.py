@@ -52,7 +52,7 @@ def decode_base64_to_tensor(base64_str):
         ])
         return transform(image)
     except Exception as e:
-        raise ValueError(f"Error decoding image: {e}")
+        raise ValueError("Error decoding image: {e}")
 
 def decode_audio_to_tensor(base64_str):
     try:
