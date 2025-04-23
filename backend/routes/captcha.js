@@ -1,7 +1,7 @@
 // routes/captcha.js
 
 const express = require("express");
-const { solveCaptcha } = require("../controllers/captchaController");
+const {solveCaptcha} = require("../controllers/captchaController");
 
 const router = express.Router();
 
